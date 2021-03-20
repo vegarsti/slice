@@ -81,24 +81,30 @@ func slice(in io.Reader, out io.Writer, from int, to int) error {
 	return nil
 }
 
+func max(a, b int) int {
+	if a <= b {
+		return b
+	}
+	return a
+}
+
 func sliceLine(line string, from int, to int) string {
-	// handle negative slices
+	// negative from
 	if from < 0 {
-		from = len(line) + from
-	}
-	if from < 0 {
-		from = 0
-	}
-	if to < 0 {
-		to = len(line) + to
+		from = max(0, len(line)+from)
 	}
 
-	// handle variable length
+	// to exceeds line length
 	if to == 0 || to > len(line) {
 		to = len(line)
 	}
 
-	if from > to {
+	// negative to
+	if to < 0 {
+		to = max(0, len(line)+to)
+	}
+
+	if from >= to {
 		return ""
 	}
 	return line[from:to]

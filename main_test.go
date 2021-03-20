@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -67,12 +68,17 @@ func TestSliceLine(t *testing.T) {
 		{"", "", 0, 0},
 		{"a", "a", -1, 0},
 		{"a", "a", -2, 0},
+		{"a", "a", -2, 0},
 		{"ab", "b", -1, 0},
 		{"ab", "a", 0, 1},
 		{"ab", "ab", 0, 2},
+		{"ab", "a", 0, -1},
+		{"ab", "", 0, -2},
+		{"ab", "", 0, -3},
 	}
 	for _, tc := range tcs {
-		t.Run(tc.line, func(t *testing.T) {
+		description := fmt.Sprintf("%d:%d on %s", tc.from, tc.to, tc.line)
+		t.Run(description, func(t *testing.T) {
 			if s := sliceLine(tc.line, tc.from, tc.to); s != tc.slice {
 				t.Errorf("expected '%s', but was '%s'", tc.slice, s)
 			}
