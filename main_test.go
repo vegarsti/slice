@@ -12,18 +12,16 @@ func TestParseArgsOK(t *testing.T) {
 		to    int
 	}{
 		{":", 0, 0},
-		{"0:1", 0, 1},
 		{":1", 0, 1},
-		{"0:", 0, 0},
 		{"1:", 1, 0},
-		{"0:-1", 0, -1},
+		{":-1", 0, -1},
 		{"-2:-1", -2, -1},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.slice, func(t *testing.T) {
 			from, to, err := parseArgs([]string{tc.slice})
 			if err != nil {
-				t.Errorf("got error '%v'", err)
+				t.Errorf("got error: '%v'", err)
 			}
 			if from != tc.from {
 				t.Errorf("from is %d, expected %d", from, tc.from)
@@ -49,7 +47,9 @@ func TestParseArgsError(t *testing.T) {
 		{":2:3"},
 		{"1:2:3"},
 		{"-2:1"},
-		{"-1:2"},
+		{"-1:-2"},
+		{"0:"},
+		{":0"},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.slice, func(t *testing.T) {

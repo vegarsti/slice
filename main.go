@@ -40,6 +40,9 @@ func parseArgs(args []string) (int, int, error) {
 	if len(fromTo) > 2 {
 		return 0, 0, fmt.Errorf("invalid range format: must be `from:` or `:to` or `from:to`")
 	}
+	if fromTo[0] == "0" {
+		return 0, 0, fmt.Errorf("from cannot be 0")
+	}
 	if fromTo[0] == "" {
 		fromTo[0] = "0"
 	}
@@ -56,7 +59,13 @@ func parseArgs(args []string) (int, int, error) {
 			return 0, 0, fmt.Errorf("to cannot be 0")
 		}
 	}
-	if from > to && from >= 0 && to > 0 {
+	if from == 0 {
+		return 0, to, nil
+	}
+	if to == 0 {
+		return from, 0, nil
+	}
+	if from > to {
 		return 0, 0, fmt.Errorf("from must be before to")
 	}
 	if from < 0 && to > 0 {
