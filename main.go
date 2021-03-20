@@ -83,6 +83,9 @@ func sliceLine(line string, from int, to int) string {
 	if from < 0 {
 		from = len(line) + from
 	}
+	if from < 0 {
+		from = 0
+	}
 	if to < 0 {
 		to = len(line) + to
 	}
