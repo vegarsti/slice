@@ -16,7 +16,6 @@ func TestParseArgsOK(t *testing.T) {
 		{"0:", 0, 0},
 		{"0:-1", 0, -1},
 		{"-2:-1", -2, -1},
-		{"-2:1", -2, 1},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.slice, func(t *testing.T) {
@@ -47,6 +46,7 @@ func TestParseArgsError(t *testing.T) {
 		{"1:2:"},
 		{":2:3"},
 		{"1:2:3"},
+		{"-2:1"},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.slice, func(t *testing.T) {
