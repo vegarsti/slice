@@ -1,6 +1,19 @@
 # slice
 
+<p>
+    <a href="https://github.com/vegarsti/slice/releases"><img src="https://img.shields.io/github/release/vegarsti/slice.svg" alt="Latest Release"></a>
+    <a href="https://github.com/vegarsti/slice/actions"><img src="https://github.com/vegarsti/slice/workflows/build/badge.svg" alt="Build Status"></a>
+    <a href="http://goreportcard.com/report/github.com/vegarsti/table"><img src="http://goreportcard.com/badge/vegarsti/table" alt="Go ReportCard"></a>
+</p>
+
 Like [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), but with the negative slicing we know and love.
+
+## Installation
+
+```sh
+$ go get "github.com/vegarsti/slice"
+```
+
 
 ## Usage
 
