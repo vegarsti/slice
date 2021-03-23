@@ -16,12 +16,13 @@ func TestParseArgsOK(t *testing.T) {
 		{"1:", 1, 0},
 		{":-1", 0, -1},
 		{"-2:-1", -2, -1},
+		{"1:-1", 1, -1},
 	}
 	for _, tc := range tcs {
 		t.Run(tc.slice, func(t *testing.T) {
 			from, to, err := parseArgs([]string{tc.slice})
 			if err != nil {
-				t.Errorf("got error: '%v'", err)
+				t.Fatalf("got error: '%v'", err)
 			}
 			if from != tc.from {
 				t.Errorf("from is %d, expected %d", from, tc.from)

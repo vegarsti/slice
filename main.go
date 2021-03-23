@@ -65,8 +65,8 @@ func parseArgs(args []string) (int, int, error) {
 	if to == 0 {
 		return from, 0, nil
 	}
-	if from > to {
-		return 0, 0, fmt.Errorf("from must be before to")
+	if from > to && !(from > 0 && to < 0) {
+		return 0, 0, fmt.Errorf("from must be before to if both are positive")
 	}
 	if from < 0 && to > 0 {
 		return 0, 0, fmt.Errorf("to must be negative if from is negative")
